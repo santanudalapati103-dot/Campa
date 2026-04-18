@@ -71,10 +71,11 @@ nav {
   border-radius: 8px;
   text-align: center;
 }
-
 footer {
-  background: #374151;
-  color: white;
-  text-align: center;
-  padding: 1rem;
+  width: 80%;          /* footer width */
+  margin: 0 auto;      /* centers footer horizontally */
+  padding: 20px;       /* inner spacing */
+  background: #f1f1f1;
+  text-align: center;/* light background */
+  color: white
 }
