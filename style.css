@@ -22,7 +22,18 @@ nav {
   display: flex;
   gap: 1rem;
 }
+.bounce {
+  width: 100px;
+  height: 100px;
+  background: #ff5722;
+  position: relative;
+  animation: bounce 2s infinite;
+}
 
+@keyframes bounce {
+  0%, 100% { top: 0; }
+  50% { top: 50px; }
+}
 .nav-links a {
   color: white;
   text-decoration: none;
