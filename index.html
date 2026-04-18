@@ -91,6 +91,53 @@ public class SendMessageServlet extends HttpServlet {
         }
     }
 }
+
+  from flask import Flask, render_template, request
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+app = Flask(__name__)
+
+# Configure your email
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587
+SENDER_EMAIL = "santanudalapati103@gmail.com"
+SENDER_PASSWORD = "yqps sawn mgdu vhpp"   # Use Gmail App Password, not your real password
+RECEIVER_EMAIL = "recipient@example.com"
+
+@app.route("/")
+def index():
+    return render_template("contact.html")
+
+@app.route("/send", methods=["POST"])
+def send_email():
+    name = request.form["name"]
+    email = request.form["email"]
+    message_text = request.form["message"]
+
+    # Create email content
+    msg = MIMEMultipart()
+    msg["From"] = SENDER_EMAIL
+    msg["To"] = RECEIVER_EMAIL
+    msg["Subject"] = "New Message from Contact Form"
+
+    body = f"Name: {name}\nEmail: {email}\nMessage:\n{message_text}"
+    msg.attach(MIMEText(body, "plain"))
+
+    try:
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.starttls()
+        server.login(SENDER_EMAIL, SENDER_PASSWORD)
+        server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, msg.as_string())
+        server.quit()
+        return "Message sent successfully!"
+    except Exception as e:
+        return f"Error: {str(e)}"
+
+if __name__ == "__main__":
+    app.run(debug=True)
+  
   <footer>
     <p>© 2026 My Business. All rights reserved.</p>
   </footer>
